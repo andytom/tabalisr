@@ -19,7 +19,12 @@ def csv_to_array( content ):
     """Turn the passed csv string into an array."""
     csv_io = StringIO.StringIO(content)
 
-    dialect = csv.Sniffer().sniff( csv_io.read(1024) )
+    dialect = None
+    try:
+        dialect = csv.Sniffer().sniff( csv_io.read(1024) )
+    except:
+        # Sniffing didn't work assume it is excel
+        dialect = 'excel'
     csv_io.seek(0)
 
     return [i for i in csv.reader(csv_io, dialect)]
@@ -29,20 +34,19 @@ def csv_to_array( content ):
 #------------------------------------------------------------------------------#
 def generate_table( array_iterator ):
     """Take a square array of arrays and return an ascii table."""
-    max_length = get_max_length(array_iterator)
+    max_lengths = get_max_length(array_iterator)
 
     final_array = []
 
-    # Insert the top spacer row
-    final_array.append(make_spacer(max_length))
-
     # Build all the individual rows
     for i in array_iterator:
-        final_array.append(make_row(i, max_length))
+        final_array.append(make_row(i, max_lengths))
     
-    # Add a second spacer to make the header
-    final_array.insert(2, make_spacer(max_length))
-    final_array.append(make_spacer(max_length))
+    # Add spacers to make the header and close off the bottom
+    spacer = make_spacer(max_lengths)
+    final_array.insert(0, spacer)
+    final_array.insert(2, spacer)
+    final_array.append(spacer)
 
     return "\n".join(final_array)
 
@@ -54,9 +58,10 @@ def make_spacer( length_array ):
 def make_row( row, max_length ):
     """Make a row"""
     final_row = ""
-    for i, string in enumerate(row):
-        padding = ' ' * ( max_length[i] - len(string) + 1 )
-        final_row += '| '+string + padding
+    for i, max_size in enumerate(max_length):
+        string = row[i] if len(row) > i else ''
+        padding = ' ' * ( max_size - len(string) + 1 )
+        final_row += '| '+ string + padding
 
     return final_row + '|'
 
@@ -64,7 +69,8 @@ def get_max_length(array_iterator):
     """Return an array of the longest string at each index in each array
        in the passed array iterator.
     """
-    max_length = [ 0 ] * len( array_iterator[0] )
+    longest_array = max([len(i) for i in array_iterator])
+    max_length = [ 0 ] * longest_array
 
     for line in array_iterator:
        for i, string in enumerate(line):
