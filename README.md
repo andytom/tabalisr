@@ -8,20 +8,17 @@ ascii table.
 
 The first row is assumed to be the header.
 
-<pre>
-foo,bar,baz
-1,2,3
-4,5,6
-</pre>
-
-<pre>
-+-----+-----+-----+
-| foo | bar | baz |
-+-----+-----+-----+
-| 1   | 2   | 3   |
-| 4   | 5   | 6   |
-+-----+-----+-----+
-</pre>
+###Example Input
+    foo,bar,baz
+    1,2,3
+    4,5,6
+###Example Output
+    +-----+-----+-----+
+    | foo | bar | baz |
+    +-----+-----+-----+
+    | 1   | 2   | 3   |
+    | 4   | 5   | 6   |
+    +-----+-----+-----+
 
 ##Usage
 
