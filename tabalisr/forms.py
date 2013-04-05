@@ -11,13 +11,13 @@
 
 from flask_wtf import Form, TextField, Required, TextAreaField
 
-#------------------------------------------------------------------------------#
+
+#-----------------------------------------------------------------------------#
 # Forms
-#------------------------------------------------------------------------------#
+#-----------------------------------------------------------------------------#
 class csv_form(Form):
     content = TextAreaField('CSV string',
-                            validators = [Required()],
-                            description = """The CSV string to be converted 
+                            validators=[Required()],
+                            description="""The CSV string to be converted
                             into a table"""
-                           )
-
+                            )
