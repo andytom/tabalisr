@@ -28,5 +28,7 @@ You should change the SECRET_KEY in the main.cfg file to be something more secur
 
 A development server can be started by running "python run_dev_server.py".
 
+Tests can be run by running "python tests.py".
+
 ##Todo
-* Add proper Tests
+* Add more Tests
