@@ -20,7 +20,6 @@ def csv_to_array(content):
     """Turn the passed csv string into an array."""
     csv_io = StringIO.StringIO(content)
 
-    dialect = None
     try:
         dialect = csv.Sniffer().sniff(csv_io.read(1024))
     except:
@@ -61,13 +60,16 @@ def make_spacer(length_array):
 
 def make_row(row, max_length):
     """Make a row"""
-    final_row = ""
+    final_row = []
     for i, max_size in enumerate(max_length):
-        string = row[i] if len(row) > i else ''
-        padding = ' ' * (max_size - len(string) + 1)
-        final_row += '| ' + string + padding
+        if len(row) > i:
+            string = row[i]
+        else:
+            string = ''
+        final_row.append('| {:<{max_size}} '.format(string, max_size=max_size))
 
-    return final_row + '|'
+    final_row.append('|')
+    return "".join(final_row)
 
 
 def get_max_length(array_iterator):
@@ -91,9 +93,12 @@ def process_string(csv_string):
 
     return generate_table(csv_to_array(csv_string))
 
+
 #-----------------------------------------------------------------------------#
 # Use for testing
 #-----------------------------------------------------------------------------#
 if __name__ == '__main__':
-    test_data = "Foo, bar, baz,a\nspam,ham,spam and eggs,b\n4,5,6,c"
+    test_data = """Foo,Bar,Baz,a
+spam,ham,spam and eggs,
+4,5,6,c"""
     print process_string(test_data)
