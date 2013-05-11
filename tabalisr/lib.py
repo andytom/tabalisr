@@ -63,7 +63,7 @@ def make_row(row, max_length):
     final_row = []
     for i, max_size in enumerate(max_length):
         if len(row) > i:
-            string = row[i]
+            string = row[i].strip()
         else:
             string = ''
         final_row.append('| {:<{max_size}} '.format(string, max_size=max_size))
