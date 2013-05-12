@@ -1,6 +1,5 @@
 import unittest
 import json
-from collections import namedtuple
 
 from tabalisr.app import app
 from tabalisr.lib import process_string
@@ -14,12 +13,6 @@ def load_json_tests(filename):
 
 #-----------------------------------------------------------------------------#
 class LibTestCase(unittest.TestCase):
-    def setUp(self):
-        pass
-
-    def tearDown(self):
-        pass
-
     def test_table_construction(self):
         json_file = 'test/table_construction_tests.json'
         for test in load_json_tests(json_file):
