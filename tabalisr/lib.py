@@ -10,7 +10,10 @@
     :version: 0.1
 """
 import csv
-import StringIO
+try:
+    import cStringIO as StringIO
+except:
+    import StringIO
 
 
 #-----------------------------------------------------------------------------#
