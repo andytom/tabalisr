@@ -1,10 +1,10 @@
-[
-    {
-        "input": "Foo,Bar,Baz\nspam,ham,spam and eggs",
-        "result": "+------+-----+---------------+\n| Foo  | Bar | Baz           |\n+------+-----+---------------+\n| spam | ham | spam and eggs |\n+------+-----+---------------+"
-    },
-    {
-        "input": "Foo, Bar, Baz\nspam, ham, spam and eggs",
-        "result": "+------+-----+---------------+\n| Foo  | Bar | Baz           |\n+------+-----+---------------+\n| spam | ham | spam and eggs |\n+------+-----+---------------+"
-    }
-]
+{
+    "Basic Construction test" : {
+        "input" : "Foo,Bar,Baz\nspam,ham,spam and eggs",
+        "result" : "+------+-----+---------------+\n| Foo  | Bar | Baz           |\n+------+-----+---------------+\n| spam | ham | spam and eggs |\n+------+-----+---------------+"
+        },
+    "Whitespace Test" : {
+        "input" : "Foo, Bar, Baz\nspam, ham, spam and eggs",
+        "result" : "+------+-----+---------------+\n| Foo  | Bar | Baz           |\n+------+-----+---------------+\n| spam | ham | spam and eggs |\n+------+-----+---------------+"
+        }
+}
