@@ -24,7 +24,7 @@ class LibTestCase(unittest.TestCase):
 
     def _run_test(self, test_name):
         test = self.all_tests[test_name]
-        assert process_string(test['input']) == test['result']
+        self.assertEqual(process_string(test['input']), test['result'])
 
     def test_table_construction(self):
         self._run_test("Basic Construction test")
