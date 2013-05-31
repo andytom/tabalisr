@@ -95,13 +95,3 @@ def process_string(csv_string):
     csv_arrays = csv_to_array(csv_string)
 
     return generate_table(csv_to_array(csv_string))
-
-
-#-----------------------------------------------------------------------------#
-# Use for testing
-#-----------------------------------------------------------------------------#
-if __name__ == '__main__':
-    test_data = """Foo,Bar,Baz,a
-spam,ham,spam and eggs,
-4,5,6,c"""
-    print process_string(test_data)
