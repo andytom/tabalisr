@@ -19,7 +19,7 @@ def load_json_tests(filename):
 class LibTestCase(unittest.TestCase):
     """Tests to test the libary functions"""
     def setUp(self):
-        json_file = 'test/table_construction_tests.json'
+        json_file = 'resources/table_construction_tests.json'
         self.all_tests = load_json_tests(json_file)
 
     def _run_test(self, test_name):
