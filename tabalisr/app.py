@@ -27,16 +27,15 @@
 #-----------------------------------------------------------------------------#
 from flask import Flask, render_template, flash
 from flask_wtf import Form, TextField, Required, TextAreaField
+from prettytable import from_csv
+try:
+    import cStringIO as StringIO
+except ImportError:
+    import StringIO
+
 
 app = Flask(__name__)
 app.config.from_pyfile('main.cfg')
-
-try:
-    import cStringIO as StringIO
-# TODO - Change this to a single exception
-except ImportError:
-    import StringIO
-from prettytable import from_csv
 
 
 #-----------------------------------------------------------------------------#
