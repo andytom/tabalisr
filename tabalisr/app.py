@@ -26,13 +26,46 @@
 # Setup
 #-----------------------------------------------------------------------------#
 from flask import Flask, render_template, flash
-from tabalisr.forms import csv_form
-from tabalisr.lib import process_string
+from flask_wtf import Form, TextField, Required, TextAreaField
 
 app = Flask(__name__)
 app.config.from_pyfile('main.cfg')
 
+try:
+    import cStringIO as StringIO
+# TODO - Change this to a single exception
+except ImportError:
+    import StringIO
+from prettytable import from_csv
 
+
+#-----------------------------------------------------------------------------#
+# Helper methods
+#-----------------------------------------------------------------------------#
+def process_string(csv_string):
+    """Take a raw csv string and convert it into an ascii table"""
+    csv_io = StringIO.StringIO(csv_string)
+    table = from_csv(csv_io)
+
+    table.align = 'l'
+
+    return table.get_string()
+
+
+#-----------------------------------------------------------------------------#
+# Forms
+#-----------------------------------------------------------------------------#
+class csv_form(Form):
+    content = TextAreaField('CSV string',
+                            validators=[Required()],
+                            description="""The CSV string to be converted
+                            into a table"""
+                            )
+
+
+#-----------------------------------------------------------------------------#
+# Routes
+#-----------------------------------------------------------------------------#
 @app.route('/', methods=['GET', 'POST'])
 def index():
     form = csv_form()
@@ -41,5 +74,4 @@ def index():
         table = process_string(form.content.data)
         flash("All done", "alert-success")
         return render_template('download.html', table=table)
-
     return render_template('index.html', form=form)
