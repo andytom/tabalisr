@@ -1,6 +1,8 @@
 # Tabalisr
 Turn csv into ascii tables.
 
+**Deprecated in favour of [toolkit](https://github.com/andytom/toolkit)**
+ 
 ## About
 
 A simple app for converting csv files into a nicely formatted
